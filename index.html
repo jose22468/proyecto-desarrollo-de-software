@@ -1,82 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Biblioteca de Juegos - 20 juegos</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Biblioteca de Juegos</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id="app">
-        <!-- Pantalla de login -->
-        <div id="login-screen" class="screen active">
-            <h1>🎮 Biblioteca de 20 Juegos</h1>
-            <div class="login-box">
-                <h3>Iniciar Sesión</h3>
-                <input type="text" id="username-input" placeholder="Usuario" autocomplete="off">
-                <button id="btn-login">Entrar</button>
-                <button id="btn-admin-toggle" class="secondary">Modo Admin</button>
-                <div id="admin-fields" class="hidden">
-                    <input type="password" id="admin-pass" placeholder="Contraseña admin">
-                    <button id="btn-admin-login">Entrar Admin</button>
-                </div>
-                <p id="login-msg"></p>
-            </div>
-        </div>
+  <header>
+    <h1>🎮 Mini Biblioteca de Juegos (20)</h1>
+    <p>Proyecto Estructura de Datos - Usuarios, tiempos, estadísticas y administración</p>
+  </header>
 
-        <!-- Pantalla de usuario -->
-        <div id="user-screen" class="screen">
-            <div class="user-info">
-                <div>
-                    <strong id="user-name-display"></strong>
-                    <span id="ingresos-badge" class="badge"></span>
-                    <br><small>Último ingreso: <span id="last-login-display"></span></small>
-                </div>
-                <button id="btn-logout" class="secondary">Cerrar sesión</button>
-            </div>
-            <div class="menu-buttons">
-                <button id="btn-tab-jugar" class="active-tab">🎲 Jugar</button>
-                <button id="btn-tab-estadisticas">📊 Mis estadísticas</button>
-                <button id="btn-tab-global">🌐 Ranking global</button>
-            </div>
-            <div id="tab-jugar" class="tab-content">
-                <div id="game-grid" class="game-grid"></div>
-                <div id="game-container" class="hidden"></div>
-                <button id="btn-back-games" class="hidden secondary">← Volver a la lista</button>
-            </div>
-            <div id="tab-estadisticas" class="tab-content hidden">
-                <table class="stats-table" id="mis-stats-table">
-                    <thead><tr><th>Juego</th><th>Horas acumuladas</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div id="tab-global" class="tab-content hidden">
-                <table class="stats-table" id="global-stats-table">
-                    <thead><tr><th>Juego</th><th>Horas totales</th><th>Usuarios únicos</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-                <p id="most-played-text"></p>
-            </div>
-        </div>
+  <main class="container">
+    <section class="panel login-panel">
+      <h2>Ingreso de Usuario</h2>
+      <div class="row">
+        <input type="text" id="usernameInput" placeholder="Nombre de usuario (ej: pepito)" />
+        <button id="loginBtn">Ingresar</button>
+      </div>
+      <p id="currentUserInfo">Usuario actual: <strong>Ninguno</strong></p>
+      <p id="adminInfo">Modo admin: <strong>No</strong></p>
+      <small>Tip: para ser admin usa usuario <code>admin</code> y clave <code>1234</code></small>
+    </section>
 
-        <!-- Pantalla de administrador -->
-        <div id="admin-screen" class="screen">
-            <div class="flex-between">
-                <h2>Panel de Administrador</h2>
-                <button id="btn-admin-logout" class="secondary">Salir</button>
-            </div>
-            <div class="admin-panel">
-                <select id="admin-user-select">
-                    <option value="">-- Selecciona un usuario --</option>
-                </select>
-                <div id="admin-user-stats"></div>
-                <hr>
-                <h3>Estadísticas globales</h3>
-                <table class="stats-table" id="admin-global-table"></table>
-            </div>
-        </div>
-    </div>
+    <section class="panel games-panel">
+      <h2>Biblioteca de Juegos</h2>
+      <div id="gamesGrid" class="games-grid"></div>
+    </section>
 
-    <script src="game-library.js"></script>
+    <section class="panel game-panel">
+      <h2>Juego actual</h2>
+      <p id="gameStatus">Selecciona un juego para iniciar.</p>
+      <div class="row">
+        <button id="startGameBtn" disabled>▶ Iniciar Juego</button>
+        <button id="endGameBtn" disabled>⏹ Finalizar Juego</button>
+      </div>
+      <div id="gameArea" class="game-area"></div>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>Estadísticas</h2>
+      <button id="refreshStatsBtn">Actualizar estadísticas</button>
+      <p id="mostPlayedGame">Juego más jugado: -</p>
+      <div id="statsTableContainer"></div>
+    </section>
+
+    <section class="panel user-panel">
+      <h2>Mi registro (usuario actual)</h2>
+      <div id="userRecord"></div>
+    </section>
+
+    <section class="panel admin-panel" id="adminPanel" hidden>
+      <h2>Panel de Administrador</h2>
+      <p>Editar tiempo acumulado de cualquier usuario en cualquier juego.</p>
+      <div class="admin-controls">
+        <input type="text" id="adminUser" placeholder="Usuario (ej: pepito)" />
+        <select id="adminGameSelect"></select>
+        <input type="number" id="adminMinutes" placeholder="Nuevo tiempo (minutos)" min="0" />
+        <button id="adminUpdateBtn">Guardar cambio</button>
+      </div>
+      <p id="adminMsg"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
