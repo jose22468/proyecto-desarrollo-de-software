@@ -2,63 +2,51 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Biblioteca de Juegos</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <header>
     <h1>🎮 Mini Biblioteca de Juegos (20)</h1>
-    <p>Proyecto Estructura de Datos - Usuarios, tiempos, estadísticas y administración</p>
+    <p>Usuarios, tiempos acumulados, ingresos por juego y estadísticas</p>
   </header>
 
   <main class="container">
-    <section class="panel login-panel">
-      <h2>Ingreso de Usuario</h2>
+    <section class="panel">
+      <h2>Ingreso</h2>
       <div class="row">
-        <input type="text" id="usernameInput" placeholder="Nombre de usuario (ej: pepito)" />
-        <button id="loginBtn">Ingresar</button>
+        <input id="username" placeholder="Usuario (ej: pepito)">
+        <input id="password" placeholder="Clave (solo admin)" type="password">
+        <button id="loginBtn">Entrar</button>
       </div>
-      <p id="currentUserInfo">Usuario actual: <strong>Ninguno</strong></p>
-      <p id="adminInfo">Modo admin: <strong>No</strong></p>
-      <small>Tip: para ser admin usa usuario <code>admin</code> y clave <code>1234</code></small>
+      <p id="sessionInfo">Usuario actual: ninguno</p>
+      <small>Admin: usuario <b>admin</b>, clave <b>1234</b></small>
     </section>
 
-    <section class="panel games-panel">
-      <h2>Biblioteca de Juegos</h2>
-      <div id="gamesGrid" class="games-grid"></div>
+    <section class="panel">
+      <h2>Biblioteca</h2>
+      <div id="gamesGrid" class="grid"></div>
     </section>
 
-    <section class="panel game-panel">
-      <h2>Juego actual</h2>
-      <p id="gameStatus">Selecciona un juego para iniciar.</p>
+    <section class="panel">
+      <h2>Mi registro</h2>
+      <div id="myRecord"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Estadísticas globales</h2>
+      <p id="topGame">Juego más jugado: -</p>
+      <div id="stats"></div>
+    </section>
+
+    <section class="panel" id="adminPanel" hidden>
+      <h2>Administrador</h2>
       <div class="row">
-        <button id="startGameBtn" disabled>▶ Iniciar Juego</button>
-        <button id="endGameBtn" disabled>⏹ Finalizar Juego</button>
-      </div>
-      <div id="gameArea" class="game-area"></div>
-    </section>
-
-    <section class="panel stats-panel">
-      <h2>Estadísticas</h2>
-      <button id="refreshStatsBtn">Actualizar estadísticas</button>
-      <p id="mostPlayedGame">Juego más jugado: -</p>
-      <div id="statsTableContainer"></div>
-    </section>
-
-    <section class="panel user-panel">
-      <h2>Mi registro (usuario actual)</h2>
-      <div id="userRecord"></div>
-    </section>
-
-    <section class="panel admin-panel" id="adminPanel" hidden>
-      <h2>Panel de Administrador</h2>
-      <p>Editar tiempo acumulado de cualquier usuario en cualquier juego.</p>
-      <div class="admin-controls">
-        <input type="text" id="adminUser" placeholder="Usuario (ej: pepito)" />
-        <select id="adminGameSelect"></select>
-        <input type="number" id="adminMinutes" placeholder="Nuevo tiempo (minutos)" min="0" />
-        <button id="adminUpdateBtn">Guardar cambio</button>
+        <input id="editUser" placeholder="Usuario">
+        <select id="editGame"></select>
+        <input id="editMinutes" type="number" min="0" placeholder="Minutos">
+        <button id="saveEdit">Guardar</button>
       </div>
       <p id="adminMsg"></p>
     </section>
