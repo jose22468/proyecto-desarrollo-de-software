@@ -7,3 +7,11 @@ button{cursor:pointer;background:#0ea5e9;border:none;font-weight:bold}.grid{disp
 .card{border:1px solid var(--line);border-radius:10px;padding:10px;background:#0b1220}table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--line);padding:6px}
 .game-wrap{width:min(900px,95%);margin:16px auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
 .board3{display:grid;grid-template-columns:repeat(3,70px);gap:4px}.board3 button{height:70px}
+
+
+#snakeCanvas{border:1px solid var(--line);border-radius:10px;background:#0b1220;margin-top:8px}
+.chess-board{display:grid;grid-template-columns:repeat(8,48px);width:max-content;border:1px solid #111827;border-radius:8px;overflow:hidden;margin-top:8px}
+.chess-square{width:48px;height:48px;font-size:28px;display:grid;place-items:center;padding:0;border:none;cursor:pointer}
+.chess-square.light{background:#f1f5f9;color:#111827}
+.chess-square.dark{background:#64748b;color:#f8fafc}
+.chess-square.selected{outline:3px solid #22c55e;outline-offset:-3px}
