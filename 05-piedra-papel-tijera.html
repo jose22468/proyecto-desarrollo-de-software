@@ -1,1 +1,81 @@
-<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title id="title"></title><link rel="stylesheet" href="styles.css"></head><body><main class="game-wrap"><h2 id="gameName"></h2><p id="sessionMsg"></p><div class="row"><button id="startBtn">Iniciar sesión</button><button id="endBtn">Finalizar sesión</button><button onclick="location.href='index.html'">Volver</button></div><div id="area"></div></main><script>const GAME_NAME="Piedra Papel Tijera";</script><script src="game-base.js"></script><script>area.innerHTML='<button>Piedra</button><button>Papel</button><button>Tijera</button><p id=m></p>';const o=['Piedra','Papel','Tijera'];[...area.querySelectorAll('button')].forEach(b=>b.onclick=()=>{let cpu=o[Math.random()*3|0];m.textContent='Tú '+b.textContent+' vs CPU '+cpu;});</script></body></html>
+<!doctype html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title id="title"></title><link rel="stylesheet" href="styles.css"></head><body><main class="game-wrap"><h2 id="gameName"></h2><p id="sessionMsg"></p><div class="row"><button id="startBtn">Iniciar sesión</button><button id="endBtn">Finalizar sesión</button><button onclick="location.href='index.html'">Volver</button></div><div id="area"></div></main><script>const GAME_NAME="Piedra Papel Tijera";</script><script src="game-base.js"></script><script>
+const MATCH_BEST_OF=5;
+const SCORE_KEY=`${KEY}_score_${user}_${GAME_NAME}`;
+const initialState={playerScore:0,botScore:0,draws:0,round:0};
+let gameState={...initialState,...JSON.parse(localStorage.getItem(SCORE_KEY)||'{}')};
+let selectedMove='';
+
+area.innerHTML=`
+  <div class="row">
+    <button data-move="Piedra">Piedra</button>
+    <button data-move="Papel">Papel</button>
+    <button data-move="Tijera">Tijera</button>
+  </div>
+  <p id="selectedMove">Selecciona tu jugada</p>
+  <div class="row">
+    <button id="nextRoundBtn">Nueva ronda</button>
+    <button id="resetScoreBtn">Reiniciar marcador</button>
+  </div>
+  <p id="scoreboard"></p>
+  <p id="matchStatus"></p>
+  <p id="m"></p>
+`;
+
+const moves=['Piedra','Papel','Tijera'];
+const winsAgainst={Piedra:'Tijera',Papel:'Piedra',Tijera:'Papel'};
+
+function saveScore(){localStorage.setItem(SCORE_KEY,JSON.stringify(gameState));}
+function renderScore(){
+  scoreboard.textContent=`Jugador ${gameState.playerScore} - Bot ${gameState.botScore} - Empates ${gameState.draws} (Ronda ${gameState.round})`;
+  const targetWins=Math.ceil(MATCH_BEST_OF/2);
+  if(gameState.playerScore>=targetWins||gameState.botScore>=targetWins){
+    matchStatus.textContent=gameState.playerScore>gameState.botScore
+      ?`¡Ganaste el match al mejor de ${MATCH_BEST_OF}!`
+      :`El bot ganó el match al mejor de ${MATCH_BEST_OF}.`;
+  }else{
+    matchStatus.textContent=`Match al mejor de ${MATCH_BEST_OF}: primer jugador en llegar a ${targetWins} victorias.`;
+  }
+}
+
+function playRound(){
+  if(!selectedMove){m.textContent='Primero elige Piedra, Papel o Tijera.';return;}
+  const botMove=moves[Math.random()*3|0];
+  gameState.round++;
+
+  if(selectedMove===botMove){
+    gameState.draws++;
+    m.textContent=`Ronda ${gameState.round}: Tú ${selectedMove} vs Bot ${botMove} => Empate`;
+  }else if(winsAgainst[selectedMove]===botMove){
+    gameState.playerScore++;
+    m.textContent=`Ronda ${gameState.round}: Tú ${selectedMove} vs Bot ${botMove} => Ganaste`;
+  }else{
+    gameState.botScore++;
+    m.textContent=`Ronda ${gameState.round}: Tú ${selectedMove} vs Bot ${botMove} => Gana el bot`;
+  }
+
+  saveScore();
+  renderScore();
+}
+
+[...area.querySelectorAll('[data-move]')].forEach(btn=>{
+  btn.onclick=()=>{
+    selectedMove=btn.dataset.move;
+    selectedMoveEl.textContent=`Tu jugada seleccionada: ${selectedMove}`;
+  };
+});
+
+nextRoundBtn.onclick=playRound;
+resetScoreBtn.onclick=()=>{
+  gameState={...initialState};
+  selectedMove='';
+  selectedMoveEl.textContent='Selecciona tu jugada';
+  m.textContent='Marcador reiniciado.';
+  saveScore();
+  renderScore();
+};
+
+const selectedMoveEl=document.getElementById('selectedMove');
+const scoreboard=document.getElementById('scoreboard');
+const matchStatus=document.getElementById('matchStatus');
+renderScore();
+</script></body></html>
