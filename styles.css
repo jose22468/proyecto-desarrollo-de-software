@@ -1,19 +1,17 @@
-:root{
-  --bg:#0f172a; --panel:#1e293b; --line:#334155; --text:#e2e8f0;
-}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(140deg,#0b1220,#111827);color:var(--text);font-family:Arial}
+:root{--bg:#0b1220;--panel:#1f2937;--line:#334155;--text:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:linear-gradient(140deg,#0b1220,#111827);color:var(--text)}
 header{text-align:center;padding:18px;border-bottom:1px solid var(--line)}
-.container{width:min(1200px,95%);margin:16px auto;display:grid;gap:14px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-input,select,button{padding:9px;border-radius:8px;border:1px solid var(--line);background:#0b1220;color:var(--text)}
-button{cursor:pointer;background:#0ea5e9;border:none;font-weight:bold}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
-.card{background:#0b1220;border:1px solid var(--line);padding:10px;border-radius:10px}
-table{width:100%;border-collapse:collapse}
-th,td{border:1px solid var(--line);padding:6px}
-.game-wrap{width:min(900px,95%);margin:16px auto;background:var(--panel);padding:14px;border-radius:12px;border:1px solid var(--line)}
-canvas{background:#0b1220;border:1px solid var(--line)}
-.board3{display:grid;grid-template-columns:repeat(3,70px);gap:5px}
-.board3 button{height:70px;font-size:20px}
+.container{width:min(1100px,95%);margin:14px auto;display:grid;gap:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap}input,button{padding:9px;border-radius:8px;border:1px solid var(--line);background:#0b1220;color:var(--text)}
+button{cursor:pointer;background:#0ea5e9;border:none;font-weight:bold}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.card{border:1px solid var(--line);border-radius:10px;padding:10px;background:#0b1220}table{width:100%;border-collapse:collapse}th,td{border:1px solid var(--line);padding:6px}
+.game-wrap{width:min(900px,95%);margin:16px auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.board3{display:grid;grid-template-columns:repeat(3,70px);gap:4px}.board3 button{height:70px}
+
+
+#snakeCanvas{border:1px solid var(--line);border-radius:10px;background:#0b1220;margin-top:8px}
+.chess-board{display:grid;grid-template-columns:repeat(8,48px);width:max-content;border:1px solid #111827;border-radius:8px;overflow:hidden;margin-top:8px}
+.chess-square{width:48px;height:48px;font-size:28px;display:grid;place-items:center;padding:0;border:none;cursor:pointer}
+.chess-square.light{background:#f1f5f9;color:#111827}
+.chess-square.dark{background:#64748b;color:#f8fafc}
+.chess-square.selected{outline:3px solid #22c55e;outline-offset:-3px}

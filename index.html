@@ -1,54 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mini Biblioteca de Juegos</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>🎮 Mini Biblioteca de Juegos (20)</h1>
-    <p>Usuarios, tiempos acumulados, ingresos por juego y estadísticas</p>
+    <h1>🎮 Mini Biblioteca de Juegos</h1>
+    <p>20 juegos + registro de sesiones por usuario</p>
   </header>
 
   <main class="container">
     <section class="panel">
       <h2>Ingreso</h2>
       <div class="row">
-        <input id="username" placeholder="Usuario (ej: pepito)">
-        <input id="password" placeholder="Clave (solo admin)" type="password">
+        <input id="username" placeholder="Usuario" />
+        <input id="password" type="password" placeholder="Clave admin" />
         <button id="loginBtn">Entrar</button>
       </div>
       <p id="sessionInfo">Usuario actual: ninguno</p>
-      <small>Admin: usuario <b>admin</b>, clave <b>1234</b></small>
+      <small>Admin: <b>admin</b> / <b>1234</b></small>
     </section>
 
     <section class="panel">
-      <h2>Biblioteca</h2>
+      <h2>Juegos</h2>
       <div id="gamesGrid" class="grid"></div>
     </section>
 
     <section class="panel">
       <h2>Mi registro</h2>
       <div id="myRecord"></div>
-    </section>
-
-    <section class="panel">
-      <h2>Estadísticas globales</h2>
-      <p id="topGame">Juego más jugado: -</p>
-      <div id="stats"></div>
-    </section>
-
-    <section class="panel" id="adminPanel" hidden>
-      <h2>Administrador</h2>
-      <div class="row">
-        <input id="editUser" placeholder="Usuario">
-        <select id="editGame"></select>
-        <input id="editMinutes" type="number" min="0" placeholder="Minutos">
-        <button id="saveEdit">Guardar</button>
-      </div>
-      <p id="adminMsg"></p>
     </section>
   </main>
 
